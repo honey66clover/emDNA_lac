@@ -11,7 +11,7 @@
 
 namespace {
 
-
+    // For more explanations, see: http://tclap.sourceforge.net/html/classTCLAP_1_1ValueArg.html
     // input mode arguments declaration
     // one of those arguments is required
     TCLAP::ValueArg<std::string>
@@ -53,6 +53,14 @@ namespace {
                     "Minimization with pulling force on last bp.",
                     false);
 
+    // option external protein
+    TCLAP::ValueArg<std::string>
+    protein_file_arg("","external-protein",//option name
+                     "External proteins such as Lac.",//explanation
+                     false,//not required in command line
+                     "",//no default value
+                     "filename");//type description
+    
     // option pulling force
     TCLAP::ValueArg<std::string>
     pulling_force_arg("", "pulling-force",
@@ -127,6 +135,7 @@ namespace {
     // list of all ValueArg and Switch Arg
     std::vector<TCLAP::ValueArg<std::string>*> ValueArg_list({
         &x3DNAbp_input_arg, &x3DNAparams_input_arg, &bplist_input_arg,
+        &protein_file_arg,
         &pulling_force_arg,
         &DNA_model_arg,
         &external_DNA_model_arg,
