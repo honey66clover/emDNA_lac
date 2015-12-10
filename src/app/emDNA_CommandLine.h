@@ -100,7 +100,7 @@ private:
 
     // options setup private methods
     void setup_input_mode_and_file();
-    void setup_protien_file();
+    void setup_protein_file();
     void setup_collection_type();
     void setup_pulling_force();
     void setup_DNA_model();
