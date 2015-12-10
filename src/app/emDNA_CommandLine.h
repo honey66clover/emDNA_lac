@@ -49,6 +49,7 @@ public:
     // command line data accessors
     InputMode               input_mode() const;
     std::string             input_file() const;
+    std::string             protein_file() const;
     CollectionType          collection_type() const;
     bool                    pulling_force(Vector3& f) const;
     ForceFieldType          DNA_model_type() const;
@@ -69,6 +70,7 @@ private:
     std::vector<std::string>({
         "input_mode",
         "input_file",
+        "protein_file",
         "collection_type",
         "pulling_force",
         "output_name",
@@ -98,6 +100,7 @@ private:
 
     // options setup private methods
     void setup_input_mode_and_file();
+    void setup_protien_file();
     void setup_collection_type();
     void setup_pulling_force();
     void setup_DNA_model();
