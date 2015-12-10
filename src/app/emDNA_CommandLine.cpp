@@ -82,6 +82,7 @@ void emDNA_CommandLine::parse_command_line_input(int argc, char* argv[]) {
 
     // options setup
     setup_input_mode_and_file();
+    setup_protein_file();
     setup_collection_type();
     setup_pulling_force();
     setup_DNA_model();
@@ -147,6 +148,15 @@ std::string emDNA_CommandLine::input_file() const {
     find_option_with_assert_check("input_file", input_file);
 
     return input_file;
+
+};
+std::string emDNA_CommandLine::protein_file() const {
+    
+    //get protein file string
+    std::string protein_file;
+    find_option_with_assert_check("protein_file", protein_file);
+    
+    return protein_file;
 
 };
 CollectionType emDNA_CommandLine::collection_type() const {
@@ -344,6 +354,13 @@ void emDNA_CommandLine::setup_collection_type() {
 };
 
 
+//options setup private method - protein
+void emDNA_CommandLine::setup_protein_file() {
+    set_option_with_assert_check("protein_file",
+                                 protein_file_arg.getValue());
+};
+
+
 // options setup private method - pulling force
 void emDNA_CommandLine::setup_pulling_force() {
     set_option_with_assert_check("pulling_force",
@@ -420,7 +437,7 @@ std::unique_ptr<TCLAP::CmdLine> emDNA_CommandLine::emDNA_TCLAP_cmd_line_ptr() {
     // new pointer
 #define emDNA_VERSION "0.x"
     std::unique_ptr<TCLAP::CmdLine>
-    cmd_line_ptr(new TCLAP::CmdLine("emDNA - Nicolas Clauvelin, "
+    cmd_line_ptr(new TCLAP::CmdLine("emDNA - Nicolas Clauvelin, Juan Wei, "
                                     "Rutgers University",
                                     '=',
                                     emDNA_VERSION));
@@ -452,6 +469,9 @@ declare_command_line_arguments(std::unique_ptr<TCLAP::CmdLine>& cmd_line_ptr) {
     xor_switches.push_back(&hold_last_bp_sw);
     xor_switches.push_back(&pull_last_bp_sw);
     cmd_line_ptr->xorAdd(xor_switches);
+    
+    //protein
+    cmd_line_ptr->add(&protein_file_arg);
 
     // pulling force
     cmd_line_ptr->add(&pulling_force_arg);
